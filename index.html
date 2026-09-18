@@ -517,9 +517,48 @@
   .email-pill svg{ flex-shrink:0; }
   .copy-msg{ font-size:13px; color:var(--accent-teal); margin-left:4px; opacity:0; transition:opacity .2s ease; }
   .copy-msg.show{ opacity:1; }
-  .social-links{ display:flex; gap:18px; margin-top:28px; }
-  .social-links a{ font-size:14.5px; color:var(--muted); text-decoration:underline; text-underline-offset:3px; }
-  .social-links a:hover{ color:var(--text); }
+  .social-links{ display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }
+  .social-links a{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 11px;
+    border:1px solid transparent;
+    border-radius:9px;
+    font-size:14.5px;
+    color:var(--muted);
+    text-decoration:none;
+    text-underline-offset:3px;
+    transition:color .2s ease, border-color .2s ease, background .2s ease, transform .2s ease;
+  }
+  .social-links a:hover{
+    color:var(--text);
+    border-color:var(--border);
+    background:rgba(20,23,28,.72);
+    transform:translateY(-1px);
+  }
+  .contact-link-icon{
+    width:16px;
+    height:16px;
+    flex:0 0 16px;
+    display:block;
+  }
+  .contact-row .email-pill{
+    text-decoration:none;
+  }
+  .contact-row .email-pill:hover{
+    color:#fff;
+    border-color:var(--accent);
+  }
+  .contact-row .email-pill svg{
+    flex-shrink:0;
+  }
+  @media (max-width:600px){
+    .contact-row{ align-items:stretch; }
+    .contact-row .email-pill,
+    .contact-row .btn-ghost{ width:100%; justify-content:center; }
+    .social-links{ gap:6px; }
+  }
 
   footer{
     border-top:1px solid var(--border); padding:28px 0; margin-top:0;
@@ -807,17 +846,29 @@
 <h2 class="contact-heading reveal">Have a reporting process worth automating?</h2>
 <p class="contact-sub reveal">I'm currently building out my SQL and database-reporting skills alongside my day-to-day automation work — always open to talking through a data or reporting problem.</p>
 <div class="contact-row reveal">
-<button class="email-pill" id="copyEmailBtn" type="button">
-<svg fill="none" height="15" viewbox="0 0 15 15" width="15" xmlns="http://www.w3.org/2000/svg"><rect height="8.75" rx="1.25" stroke="currentColor" stroke-width="1.15" width="8.75" x="1.25" y="3.75"></rect><path d="M5 3.75V2.5C5 1.80964 5.55964 1.25 6.25 1.25H12.5C13.1904 1.25 13.75 1.80964 13.75 2.5V8.75C13.75 9.44036 13.1904 10 12.5 10H11.25" stroke="currentColor" stroke-width="1.15"></path></svg>
-          shamilv.doc@gmail.com
-          <span class="copy-msg" id="copyMsg">Copied</span>
-</button>
-<a class="btn btn-ghost" href="tel:+917994073899">+91 7994073899</a>
+<a class="email-pill" href="mailto:shamilv.doc@gmail.com" aria-label="Email Mohammed Shamil">
+  <svg fill="none" height="16" viewbox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="1.25" y="2.5" width="13.5" height="11" rx="2" stroke="currentColor" stroke-width="1.2"></rect>
+    <path d="M2.25 4L8 8.25L13.75 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+  </svg>
+  <span>shamilv.doc@gmail.com</span>
+</a>
+<a class="btn btn-ghost" href="tel:+917994073899" aria-label="Call Mohammed Shamil">
+  <svg class="contact-link-icon" fill="none" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M4.1 1.75H2.8C2.22 1.75 1.75 2.22 1.75 2.8C1.75 9.13 6.87 14.25 13.2 14.25C13.78 14.25 14.25 13.78 14.25 13.2V11.9C14.25 11.48 14 11.1 13.61 10.94L11.85 10.23C11.48 10.08 11.06 10.17 10.79 10.46L10.02 11.3C8.34 10.48 7 9.13 6.17 7.46L7.01 6.69C7.3 6.42 7.39 6 7.24 5.63L6.53 3.87C6.37 3.48 5.99 3.23 5.57 3.23H4.1V1.75Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"></path>
+  </svg>
+  <span>+91 7994073899</span>
+</a>
 </div>
 <div class="social-links reveal">
-<a href="https://linkedin.com/in/mohammed-shamil-dataanalyst-kerala" rel="noopener" target="_blank">LinkedIn</a>
-<a href="https://github.com/imshamil23" rel="noopener" target="_blank">GitHub</a>
-<a href="https://shamilanalytics.vercel.app/" rel="noopener" target="_blank">shamilanalytics.vercel.app</a>
+<a href="https://linkedin.com/in/mohammed-shamil-dataanalyst-kerala" rel="noopener noreferrer" target="_blank" aria-label="Open LinkedIn profile">
+  <svg class="contact-link-icon" viewbox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6.94 8.5H3.55V20h3.39V8.5ZM5.25 3A1.98 1.98 0 1 0 5.25 6.96 1.98 1.98 0 0 0 5.25 3ZM20.45 13.41c0-3.47-1.85-5.09-4.32-5.09-1.99 0-2.88 1.1-3.38 1.87V8.5H9.36V20h3.39v-5.7c0-1.5.28-2.95 2.14-2.95 1.83 0 1.85 1.71 1.85 3.05V20h3.39l.32-6.59Z"/></svg>
+  <span>LinkedIn</span>
+</a>
+<a href="https://github.com/imshamil23" rel="noopener noreferrer" target="_blank" aria-label="Open GitHub profile">
+  <svg class="contact-link-icon" viewbox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 1.72 2.62 1.22 3.26.93.1-.72.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.15a10.76 10.76 0 0 1 5.64 0c2.15-1.45 3.1-1.15 3.1-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.32-2.63 5.27-5.14 5.55.4.35.75 1.04.75 2.1v3.11c0 .3.2.65.78.54A11.25 11.25 0 0 0 12 .75Z"/></svg>
+  <span>GitHub</span>
+</a>
 </div>
 </div>
 </section>
@@ -915,16 +966,7 @@
     counters.forEach(el => countIo.observe(el));
   }
 
-  // Copy email
-  const copyBtn = document.getElementById('copyEmailBtn');
-  const copyMsg = document.getElementById('copyMsg');
-  copyBtn.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText('shamilv.doc@gmail.com');
-      copyMsg.classList.add('show');
-      setTimeout(() => copyMsg.classList.remove('show'), 1600);
-    } catch (e) {}
-  });
+  // Contact links are native mailto/tel/external links; no extra handler needed.
 </script>
 </body>
 </html>
