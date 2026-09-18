@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 <style>
   :root{
     --bg:#0b0d10;
@@ -241,20 +242,91 @@
   .project-row .k{ font-size:12.5px; color:var(--accent); font-weight:500; }
   .project-row .v{ font-size:14.5px; color:#c4c9d1; line-height:1.55; }
 
-  /* ---------- Skills ---------- */
-  .skills-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:28px; }
-  @media (max-width:780px){ .skills-grid{ grid-template-columns:1fr; } }
-  .skill-col-head{
-    display:flex; align-items:center; gap:10px; margin-bottom:16px;
+  /* ---------- Tools ---------- */
+  .tools-grid{
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+    gap:16px;
   }
-  .skill-col-head .lvl-dots{ display:flex; gap:4px; }
-  .skill-col-head .lvl-dots span{ width:6px; height:6px; border-radius:50%; background:var(--border); }
-  .skill-col-head .lvl-dots span.on{ background:var(--accent); }
-  .skill-col-title{ font-family:var(--font-head); font-weight:600; font-size:15px; }
-  .chip-row{ display:flex; flex-wrap:wrap; gap:8px; }
-  .chip{
-    font-size:13.5px; color:#c4c9d1; background:var(--panel-alt);
-    border:1px solid var(--border); padding:7px 13px; border-radius:100px;
+  .tool-card{
+    --tool-delay:0ms;
+    position:relative;
+    min-height:132px;
+    padding:22px 18px 18px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    gap:18px;
+    background:linear-gradient(145deg, var(--panel), var(--panel-alt));
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    opacity:0;
+    transform:translateY(34px) scale(.96);
+    transition:
+      opacity .65s ease var(--tool-delay),
+      transform .65s cubic-bezier(.2,.7,.2,1) var(--tool-delay),
+      border-color .25s ease,
+      box-shadow .25s ease;
+  }
+  .tool-card::before{
+    content:'';
+    position:absolute;
+    inset:-80px auto auto -60px;
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(232,185,77,.13), transparent 68%);
+    pointer-events:none;
+    transition:transform .4s ease;
+  }
+  .tool-card.in-view{ opacity:1; transform:none; }
+  .tool-card:hover{
+    border-color:rgba(232,185,77,.75);
+    transform:translateY(-7px) scale(1.015);
+    box-shadow:0 16px 36px rgba(0,0,0,.28);
+  }
+  .tool-card:hover::before{ transform:translate(28px,28px) scale(1.15); }
+  .tool-icon{
+    width:48px;
+    height:48px;
+    display:grid;
+    place-items:center;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:#101318;
+    color:var(--accent);
+    font-size:28px;
+    transition:transform .35s cubic-bezier(.2,.7,.2,1), color .25s ease;
+  }
+  .tool-card:hover .tool-icon{
+    transform:translateY(-3px) rotate(-4deg) scale(1.08);
+    color:var(--accent-teal);
+  }
+  .tool-icon svg{ width:27px; height:27px; }
+  .tool-name{
+    margin:0;
+    font-family:var(--font-head);
+    font-size:15.5px;
+    line-height:1.25;
+    font-weight:600;
+    color:var(--text);
+  }
+  .tool-number{
+    position:absolute;
+    top:14px;
+    right:16px;
+    font-size:11px;
+    color:var(--muted);
+    font-weight:500;
+    letter-spacing:.06em;
+  }
+  @media (max-width:1000px){ .tools-grid{ grid-template-columns:repeat(3, 1fr); } }
+  @media (max-width:720px){ .tools-grid{ grid-template-columns:repeat(2, 1fr); gap:12px; } }
+  @media (max-width:460px){ .tools-grid{ grid-template-columns:1fr; } }
+
+  @media (prefers-reduced-motion: reduce){
+    .tool-card{ opacity:1; transform:none; transition:none; }
   }
 
   /* ---------- Education / certs ---------- */
@@ -465,48 +537,45 @@
     </div>
   </section>
 
-  <!-- SKILLS -->
+  <!-- TOOLS -->
   <section id="skills">
     <div class="wrap">
       <div class="section-head reveal">
-        <div class="section-kicker">Skills</div>
-        <h2 class="section-title">Tools, by how deep I've gone</h2>
+        <div class="section-kicker">Tools &amp; Technologies</div>
+        <h2 class="section-title">Tools I’ve recently worked with</h2>
+        <p class="section-sub">A practical toolkit across analytics, reporting, automation, databases, cloud platforms and modern data engineering.</p>
       </div>
-      <div class="skills-grid">
-        <div class="reveal">
-          <div class="skill-col-head">
-            <span class="skill-col-title">Advanced</span>
-            <span class="lvl-dots"><span class="on"></span><span class="on"></span><span class="on"></span></span>
-          </div>
-          <div class="chip-row">
-            <span class="chip">Excel (advanced formulas, pivots)</span>
-            <span class="chip">VLOOKUP / INDEX-MATCH</span>
-            <span class="chip">VBA macro development</span>
-            <span class="chip">Power Query / ETL</span>
-          </div>
-        </div>
-        <div class="reveal">
-          <div class="skill-col-head">
-            <span class="skill-col-title">Intermediate</span>
-            <span class="lvl-dots"><span class="on"></span><span class="on"></span><span></span></span>
-          </div>
-          <div class="chip-row">
-            <span class="chip">Power BI &amp; DAX</span>
-            <span class="chip">Power Automate</span>
-            <span class="chip">Python for data analysis</span>
-            <span class="chip">Google Sheets / Apps Script</span>
-          </div>
-        </div>
-        <div class="reveal">
-          <div class="skill-col-head">
-            <span class="skill-col-title">Developing</span>
-            <span class="lvl-dots"><span class="on"></span><span></span><span></span></span>
-          </div>
-          <div class="chip-row">
-            <span class="chip">SQL fundamentals</span>
-            <span class="chip">Oracle-certified coursework</span>
-          </div>
-        </div>
+
+      <div class="tools-grid">
+        <article class="tool-card" style="--tool-delay:0ms"><span class="tool-number">01</span><div class="tool-icon"><i class="devicon-microsoftoffice-plain"></i></div><h3 class="tool-name">Microsoft Excel</h3></article>
+        <article class="tool-card" style="--tool-delay:45ms"><span class="tool-number">02</span><div class="tool-icon"><i class="devicon-powerbi-plain"></i></div><h3 class="tool-name">Power BI</h3></article>
+        <article class="tool-card" style="--tool-delay:90ms"><span class="tool-number">03</span><div class="tool-icon"><i class="devicon-tableau-plain"></i></div><h3 class="tool-name">Tableau</h3></article>
+        <article class="tool-card" style="--tool-delay:135ms"><span class="tool-number">04</span><div class="tool-icon"><i class="devicon-microsoftsqlserver-plain"></i></div><h3 class="tool-name">SQL</h3></article>
+        <article class="tool-card" style="--tool-delay:180ms"><span class="tool-number">05</span><div class="tool-icon"><i class="devicon-mysql-plain"></i></div><h3 class="tool-name">MySQL</h3></article>
+        <article class="tool-card" style="--tool-delay:225ms"><span class="tool-number">06</span><div class="tool-icon"><i class="devicon-python-plain"></i></div><h3 class="tool-name">Python</h3></article>
+        <article class="tool-card" style="--tool-delay:270ms"><span class="tool-number">07</span><div class="tool-icon"><i class="devicon-pandas-plain"></i></div><h3 class="tool-name">Pandas</h3></article>
+        <article class="tool-card" style="--tool-delay:315ms"><span class="tool-number">08</span><div class="tool-icon"><i class="devicon-numpy-plain"></i></div><h3 class="tool-name">NumPy</h3></article>
+        <article class="tool-card" style="--tool-delay:360ms"><span class="tool-number">09</span><div class="tool-icon"><i class="devicon-matplotlib-plain"></i></div><h3 class="tool-name">Matplotlib</h3></article>
+        <article class="tool-card" style="--tool-delay:405ms"><span class="tool-number">10</span><div class="tool-icon"><i class="devicon-seaborn-plain"></i></div><h3 class="tool-name">Seaborn</h3></article>
+        <article class="tool-card" style="--tool-delay:450ms"><span class="tool-number">11</span><div class="tool-icon"><span aria-hidden="true">PQ</span></div><h3 class="tool-name">Power Query</h3></article>
+        <article class="tool-card" style="--tool-delay:495ms"><span class="tool-number">12</span><div class="tool-icon"><i class="devicon-visualbasic-plain"></i></div><h3 class="tool-name">VBA</h3></article>
+        <article class="tool-card" style="--tool-delay:540ms"><span class="tool-number">13</span><div class="tool-icon"><i class="devicon-jupyter-plain"></i></div><h3 class="tool-name">Jupyter Notebook</h3></article>
+        <article class="tool-card" style="--tool-delay:585ms"><span class="tool-number">14</span><div class="tool-icon"><i class="devicon-git-plain"></i></div><h3 class="tool-name">Git</h3></article>
+        <article class="tool-card" style="--tool-delay:630ms"><span class="tool-number">15</span><div class="tool-icon"><i class="devicon-github-original"></i></div><h3 class="tool-name">GitHub</h3></article>
+        <article class="tool-card" style="--tool-delay:675ms"><span class="tool-number">16</span><div class="tool-icon"><i class="devicon-google-plain"></i></div><h3 class="tool-name">Google Sheets</h3></article>
+        <article class="tool-card" style="--tool-delay:720ms"><span class="tool-number">17</span><div class="tool-icon"><span aria-hidden="true">AC</span></div><h3 class="tool-name">Microsoft Access</h3></article>
+        <article class="tool-card" style="--tool-delay:765ms"><span class="tool-number">18</span><div class="tool-icon"><i class="devicon-azure-plain"></i></div><h3 class="tool-name">Azure</h3></article>
+        <article class="tool-card" style="--tool-delay:810ms"><span class="tool-number">19</span><div class="tool-icon"><span aria-hidden="true">ƒₓ</span></div><h3 class="tool-name">DAX</h3></article>
+        <article class="tool-card" style="--tool-delay:855ms"><span class="tool-number">20</span><div class="tool-icon"><i class="devicon-postgresql-plain"></i></div><h3 class="tool-name">PostgreSQL</h3></article>
+        <article class="tool-card" style="--tool-delay:900ms"><span class="tool-number">21</span><div class="tool-icon"><i class="devicon-microsoftsqlserver-plain"></i></div><h3 class="tool-name">SQL Server</h3></article>
+        <article class="tool-card" style="--tool-delay:945ms"><span class="tool-number">22</span><div class="tool-icon"><span aria-hidden="true">▥</span></div><h3 class="tool-name">Looker Studio</h3></article>
+        <article class="tool-card" style="--tool-delay:990ms"><span class="tool-number">23</span><div class="tool-icon"><span aria-hidden="true">A</span></div><h3 class="tool-name">Alteryx</h3></article>
+        <article class="tool-card" style="--tool-delay:1035ms"><span class="tool-number">24</span><div class="tool-icon"><span aria-hidden="true">❄</span></div><h3 class="tool-name">Snowflake</h3></article>
+        <article class="tool-card" style="--tool-delay:1080ms"><span class="tool-number">25</span><div class="tool-icon"><span aria-hidden="true">DB</span></div><h3 class="tool-name">Databricks</h3></article>
+        <article class="tool-card" style="--tool-delay:1125ms"><span class="tool-number">26</span><div class="tool-icon"><i class="devicon-apachespark-plain"></i></div><h3 class="tool-name">Apache Spark</h3></article>
+        <article class="tool-card" style="--tool-delay:1170ms"><span class="tool-number">27</span><div class="tool-icon"><span aria-hidden="true">BQ</span></div><h3 class="tool-name">Google BigQuery</h3></article>
+        <article class="tool-card" style="--tool-delay:1215ms"><span class="tool-number">28</span><div class="tool-icon"><i class="devicon-amazonwebservices-plain-wordmark"></i></div><h3 class="tool-name">AWS</h3></article>
+        <article class="tool-card" style="--tool-delay:1260ms"><span class="tool-number">29</span><div class="tool-icon"><i class="devicon-jira-plain"></i></div><h3 class="tool-name">Jira</h3></article>
       </div>
     </div>
   </section>
@@ -595,6 +664,24 @@
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
     revealEls.forEach(el => io.observe(el));
+  }
+
+  // Tool cards animate in with a staggered entrance when the tools section enters the viewport.
+  const toolCards = document.querySelectorAll('.tool-card');
+  if (reduceMotion) {
+    toolCards.forEach(card => card.classList.add('in-view'));
+  } else if ('IntersectionObserver' in window) {
+    const toolObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+    toolCards.forEach(card => toolObserver.observe(card));
+  } else {
+    toolCards.forEach(card => card.classList.add('in-view'));
   }
 
   // Hero chart draw-in
